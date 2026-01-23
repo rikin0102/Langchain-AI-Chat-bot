@@ -7,7 +7,7 @@ st.set_page_config(page_title="LangChain QA Chatbot", page_icon="🤖")
 st.title("Simple LangChain Chat with Groq")
 st.markdown("working demo of LangChain integration with Groq's ultra-fast inference")
 
-# ---------- SIDEBAR ----------
+#SIDEBAR
 with st.sidebar:
     st.header("Settings")
     api_key = st.text_input("Groq API Key", type="password")
@@ -25,11 +25,11 @@ with st.sidebar:
         st.session_state.messages = []
         st.rerun()
 
-# ---------- STATE ----------
+#STATE
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# ---------- CHAIN ----------
+#CHAIN
 @st.cache_resource
 def get_chain(api_key, model_name):
     llm = ChatGroq(
@@ -52,12 +52,12 @@ if not api_key:
 
 chain = get_chain(api_key, model_name)
 
-# ---------- CHAT HISTORY ----------
+# CHAT HISTORY
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-# ---------- INPUT ----------
+# INPUT SECTION
 if question := st.chat_input("Ask me anything"):
     st.session_state.messages.append({"role": "user", "content": question})
 
